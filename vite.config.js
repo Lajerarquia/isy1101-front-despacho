@@ -1,15 +1,18 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
-// https://vitejs.dev/config/
+// TODO: reemplazar <ALB_URL_AQUI> con la URL real del ALB una vez creado en AWS
 export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {
-        target: 'https://qic534o8o0.execute-api.us-east-1.amazonaws.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+      '/ventas': {
+        target: 'http://<ALB_URL_AQUI>',
+        changeOrigin: true
+      },
+      '/despacho': {
+        target: 'http://<ALB_URL_AQUI>',
+        changeOrigin: true
       }
     }
   }
